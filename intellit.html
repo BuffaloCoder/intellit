@@ -16,9 +16,16 @@
   <h1>Welcome to Meteor!</h1>
 
   {{> hello}}
+
+  {{> git}}
 </body>
 
 <template name="hello">
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="git">
+	<button class="all-issues">Issues</button>
+	<p>{{issues}}</p>
 </template>
