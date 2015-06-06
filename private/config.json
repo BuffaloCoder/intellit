@@ -1,0 +1,6 @@
+{
+	"github" : {
+  	"client_id":         "ID", 
+  	"client_secret":      "SECRET"
+	}
+}
