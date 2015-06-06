@@ -1,5 +1,13 @@
 if (Meteor.isClient) {
   // counter starts at 0
+  Template.body.rendered = function(){
+  $('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 240
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    }
+  );
+};
   Session.setDefault('counter', 0);
 
   Template.hello.helpers({
