@@ -25,8 +25,8 @@
           <ul style="color:black;" class="collection">
             {{#each issues}}
               <li class="collection-item issue-selection">
-                <strong>title:</strong>
-                {{#markdown}}{{body}}{{/markdown}}
+                {{#markdown}}**{{title}}**
+                {{body}}{{/markdown}}
               </li>
             {{/each}}
           </ul>

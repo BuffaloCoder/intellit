@@ -40,13 +40,36 @@ function getRepos() {
   return Session.get('repos');
 }
 
+function getAssignees() {
+  var token = Meteor.user().services.github.accessToken;
+  var options = {
+    params: {
+      "access_token": token
+    }
+  };
+  var url = Session.get('repo_url') + "/assignees";
+  HTTP.get(url, options,
+      function (error, res) {
+        if (error) {
+          console.log(error.message);
+        } else {
+          var assignees = [];
+          for (var i = 0; i < res.data.length; i++) {
+            var name = res.data[i].login;
+            assignees.push({name: name});
+          }
+          Session.set('assignees', assignees);
+        }
+    });
+}
+
 Template.layout.rendered = function(){
   $('.button-collapse').sideNav({
       edge: 'left', // Choose the horizontal origin
       
     }
   );
-  Session.set('issues', []);
+  Session.setDefault('issues', []);
   Session.setDefault('repos', []);
   title="test"
 };
@@ -82,5 +105,6 @@ Template.layout.events({
       }
     };
     getIssues(Session.get("repo_url") + "/issues", options);
+    getAssignees();
   }
 })
