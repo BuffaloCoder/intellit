@@ -3,4 +3,26 @@
 <!-- 	{{#markdown}}
 		<p>{{issues}}</p>
 	{{/markdown}} -->
+
+	<!-- <button class="all-issues">Issues</button> -->
+  <!-- <button class="create-issue">Create</button> -->
+
+  <form class="create-issue">
+    Title:<input type="text" name="title"><br>
+    Body:<input type="text" name="body"><br>
+    <select class="browser-default" name="assigneeSelect" id="assigneeSelect">
+      <option value="" disabled selected>Assignees</option>
+      {{#each assignee}}
+        <option value={{name}}>{{name}}</option>
+      {{/each}}
+    </select>
+    Milestone:<input type="number" name="milestone"><br>
+    Labels:<input type="text" name="labels"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+	<h1>Repo:{{repo}}</h1>
+	<div>
+		{{#markdown}}{{issues}}{{/markdown}}
+	</div>
 </template>

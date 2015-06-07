@@ -12,6 +12,5 @@ accounts-github
 materialize:materialize
 useraccounts:materialize
 iron:router
-bruz:github-api
 http
 perak:markdown
