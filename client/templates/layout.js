@@ -43,7 +43,6 @@ function getRepos() {
 Template.layout.rendered = function(){
   $('.button-collapse').sideNav({
       edge: 'left', // Choose the horizontal origin
-      
     }
   );
   Session.set('issues', []);
