@@ -1,5 +1,14 @@
 <template name="home">
+  <select class="browser-default" name="repoSelect" id="repoSelect">
+    {{#each repo}}
+      <option value={{url}}>{{name}}</option>
+    {{/each}}
+  </select>
+
 	<button class="all-issues">Issues</button>
+  <button class="create-issue">Create</button>
+  <button class="get-repos">Repos</button>
+
 	<div>
 		{{#markdown}}{{issues}}{{/markdown}}
 	</div>

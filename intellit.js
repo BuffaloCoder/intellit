@@ -4,6 +4,13 @@ if(Meteor.isClient) {
       Session.set("touch", new Date());
     });
   });
+
+
+  Accounts.ui.config({
+    requestPermissions: {
+      github: ['user', 'repo']
+    }
+  });
 }
 
 
