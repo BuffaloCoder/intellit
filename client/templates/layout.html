@@ -12,6 +12,14 @@
         <li class="{{#if isCurrentPage 'about'}}active{{/if}}" >
           <a href="{{pathFor 'about'}}">About</a>
         </li>
+        <li>  
+          <select class="browser-default" name="repoSelect" id="repoSelect">
+            <option value="" disabled selected>Repository</option>
+            {{#each repos}}
+              <option value={{url}}>{{name}}</option>
+            {{/each}}
+          </select>
+        </li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse "><i class="mdi-navigation-menu"></i></a>
       

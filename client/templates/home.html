@@ -1,13 +1,5 @@
 <template name="home">
-  <select class="browser-default" name="repoSelect" id="repoSelect">
-    <option value="" disabled selected>Repository</option>
-    {{#each repo}}
-      <option value={{url}}>{{name}}</option>
-    {{/each}}
-  </select>
-
-	<!-- <button class="all-issues">Issues</button> -->
-  <!-- <button class="create-issue">Create</button> -->
+	{{> drawingSurface}}
 
   <form class="create-issue">
     Title:<input type="text" name="title"><br>
@@ -24,9 +16,7 @@
     <input class="btn waves-effect waves-light" type="submit" value="Submit">
   </form>
 
-	<!-- <div>
-		{{#markdown}}{{issues}}{{/markdown}}
-  </div> -->
+	<h1>Repo:{{repo}}</h1>
   <ul class="collection">
   {{#each issue}}
     <li class="collection-item">

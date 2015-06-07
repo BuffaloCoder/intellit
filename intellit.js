@@ -1,11 +1,10 @@
 if(Meteor.isClient) {
   Meteor.startup(function() {
     $(window).resize(function(evt) {
-      Session.set("touch", new Date());
+
+      Session.set("resize", new Date());
     });
   });
-
-
   Accounts.ui.config({
     requestPermissions: {
       github: ['user', 'repo']

@@ -4,16 +4,6 @@ function getIssues (url, options) {
         if (error) {
           console.log(error.message);
         } else {
-          // var issues = res.data;
-          // console.log(issues);
-          // var message = "";
-          // for (var i = 0; i < issues.length; i++) {
-          //   var title = issues[i].title;
-          //   var issue = issues[i].body;
-          //   // format message for markdown
-          //   message += "_::" + title + "::_\n" + issue + "\n\n";
-          // };
-          // Session.set('issues', message);
           Session.set('issues', res.data);
         }
     });
@@ -108,7 +98,7 @@ function getAssignees() {
 Template.home.rendered = function(){
 	Template.layout.title = "test";
   Session.setDefault('issues', '');
-  Session.setDefault('repos', []);
+  Session.setDefault('repo', '');
   Session.setDefault('repo_url', '');
   Session.setDefault('assignees', []);
 };
@@ -121,8 +111,23 @@ Template.home.helpers({
     return Session.get('issues');
   },
   repo: function () {
-    return getRepos();
-    // return Session.get('repos');
+
+	  try {
+	    var token = Meteor.user().services.github.accessToken;
+	  } catch (error) { // not logged in yet
+	    return;
+	  }
+    var options = {
+      params: {
+        "access_token": token
+      }
+    };
+    if(Session.get("repo_url")){
+    	getIssues(Session.get("repo_url") + "/issues", options);
+    	getAssignees();
+    }
+
+    return Session.get('repo');
   },
   assignee: function () {
     return Session.get('assignees');
