@@ -42,6 +42,8 @@ Template.drawingSurface.events({
 		console.log('caught click');
 		Session.set('held', false);
 		Session.set('box', null);
+
+		$('#modal').openModal();
 	}
 })
 

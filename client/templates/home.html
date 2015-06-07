@@ -1,18 +1,36 @@
 <template name="home">
 	{{> drawingSurface}}
 
-  <form class="create-issue">
-    Title:<input type="text" name="title"><br>
-    Body:<input type="text" name="body"><br>
-    <select class="browser-default" name="assigneeSelect" id="assigneeSelect">
-      <option value="" disabled selected>Assignees</option>
-      {{#each assignee}}
-        <option value={{name}}>{{name}}</option>
-      {{/each}}
-    </select>
-    Milestone:<input type="number" name="milestone"><br>
-    Labels:<input type="text" name="labels"><br>
+  <div id="modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Create Issue</h4>
+      <form class="create-issue col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="title" type="text" class="validate">
+            <label for="title">Title</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="body" type="text" class="validate">
+            <label for="body">Body</label>
+          </div>
+        </div>
+        <div class="input-field col s12">
+          <select class="browser-default" name="assigneeSelect" id="assigneeSelect">
+            <option value="" disabled selected>Assignees</option>
+            {{#each assignee}}
+              <option value={{name}}>{{name}}</option>
+            {{/each}}
+          </select>
+          <!-- <label>Assignees</label> -->
+        </div>
+        <!-- Milestone:<input type="number" name="milestone"><br>
+        Labels:<input type="text" name="labels"><br> -->
+    
+        <input class="waves-effect waves-light btn" type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
 
-    <input type="submit" value="Submit">
-  </form>
+  
 </template>
