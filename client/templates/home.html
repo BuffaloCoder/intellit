@@ -1,13 +1,28 @@
 <template name="home">
   <select class="browser-default" name="repoSelect" id="repoSelect">
+    <option value="" disabled selected>Repository</option>
     {{#each repo}}
       <option value={{url}}>{{name}}</option>
     {{/each}}
   </select>
 
-	<button class="all-issues">Issues</button>
-  <button class="create-issue">Create</button>
-  <button class="get-repos">Repos</button>
+	<!-- <button class="all-issues">Issues</button> -->
+  <!-- <button class="create-issue">Create</button> -->
+
+  <form class="create-issue">
+    Title:<input type="text" name="title"><br>
+    Body:<input type="text" name="body"><br>
+    <select class="browser-default" name="assigneeSelect" id="assigneeSelect">
+      <option value="" disabled selected>Assignees</option>
+      {{#each assignee}}
+        <option value={{name}}>{{name}}</option>
+      {{/each}}
+    </select>
+    Milestone:<input type="number" name="milestone"><br>
+    Labels:<input type="text" name="labels"><br>
+
+    <input type="submit" value="Submit">
+  </form>
 
 	<div>
 		{{#markdown}}{{issues}}{{/markdown}}
