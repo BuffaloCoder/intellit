@@ -5,14 +5,6 @@ function getIssues (url, options) {
           console.log(error.message);
         } else {
           var issues = res.data;
-          var message = "";
-          for (var i = 0; i < issues.length; i++) {
-            var title = issues[i].title;
-            var issue = issues[i].body;
-            // format message for markdown
-            message += "_::" + title + "::_\n" + issue + "\n\n";
-          };
-          console.log(issues[0]);
           Session.set('issues', issues);
         }
     });
@@ -73,7 +65,10 @@ Template.layout.helpers({
 });
 
 Template.layout.events({
-  "change #repoSelect": function(evt) {
+  "click .issue-selection": function(evt) {
+    Session.set('issue', this);
+  },
+  "change .repo-select": function(evt) {
     Session.set("repo", $('#repoSelect option:selected').text());
     Session.set("repo_url", $(evt.target).val());
     try {

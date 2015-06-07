@@ -13,7 +13,7 @@
           <a href="{{pathFor 'about'}}">About</a>
         </li>
         <li class="noHover">  
-          <select class="browser-default" name="repoSelect" id="repoSelect">
+          <select class="browser-default repo-select" name="repoSelect">
             <option value="" disabled selected>Repository</option>
             {{#each repos}}
               <option value={{url}}>{{name}}</option>
@@ -24,7 +24,7 @@
           <h5 style="color:black;">Issues:</h5>
           <ul style="color:black;" class="collection">
             {{#each issues}}
-              <li class="collection-item">
+              <li class="collection-item issue-selection">
                 <strong>title:</strong>
                 {{#markdown}}{{body}}{{/markdown}}
               </li>
