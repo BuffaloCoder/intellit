@@ -1,22 +1,3 @@
-function getIssues (url, options) {
-  HTTP.get(url, options,
-      function (error, res) {
-        if (error) {
-          console.log(error.message);
-        } else {
-          var issues = res.data;
-          var message = "";
-          for (var i = 0; i < issues.length; i++) {
-            var title = issues[i].title;
-            var issue = issues[i].body;
-            // format message for markdown
-            message += "_::" + title + "::_\n" + issue + "\n\n";
-          };
-          Session.set('issues', message);
-        }
-    });
-}
-
 function createIssue(options) {
   var url = Session.get('repo_url') + "/issues";
   HTTP.post(url, options,
@@ -55,15 +36,13 @@ function getAssignees() {
 Template.home.rendered = function(){
 	Template.layout.title = "test";
   Session.setDefault('issues', '');
+  Session.setDefault('issue', '');
   Session.setDefault('repo', '');
   Session.setDefault('repo_url', '');
   Session.setDefault('assignees', []);
 };
 
 Template.home.helpers({
-  issues: function () {
-    return Session.get('issues');
-  },
   repo: function () {
 
 	  try {
@@ -77,7 +56,6 @@ Template.home.helpers({
       }
     };
     if(Session.get("repo_url")){
-    	getIssues(Session.get("repo_url") + "/issues", options);
     	getAssignees();
     }
 

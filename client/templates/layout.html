@@ -12,13 +12,24 @@
         <li class="{{#if isCurrentPage 'about'}}active{{/if}}" >
           <a href="{{pathFor 'about'}}">About</a>
         </li>
-        <li>  
+        <li class="noHover">  
           <select class="browser-default" name="repoSelect" id="repoSelect">
             <option value="" disabled selected>Repository</option>
             {{#each repos}}
               <option value={{url}}>{{name}}</option>
             {{/each}}
           </select>
+        </li>
+        <li class="noHover"> 
+          <h5 style="color:black;">Issues:</h5>
+          <ul style="color:black;" class="collection">
+            {{#each issues}}
+              <li class="collection-item">
+                <strong>title:</strong>
+                {{#markdown}}{{body}}{{/markdown}}
+              </li>
+            {{/each}}
+          </ul>
         </li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse "><i class="mdi-navigation-menu"></i></a>
