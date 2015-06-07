@@ -27,6 +27,8 @@
               <li class="collection-item issue-selection">
                 {{#markdown}}**{{title}}**
                 {{body}}{{/markdown}}
+
+                <button class="issueState waves-effect waves-light btn" value={{number}}>close</button>
               </li>
             {{/each}}
           </ul>

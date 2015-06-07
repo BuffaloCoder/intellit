@@ -12,27 +12,6 @@ function createIssue(options) {
   return Session.get('createIssueRes');
 }
 
-function closeIssue(number) {
-  var url = Session.get('repo_url') + "/issues/" + number;
-  var token = Meteor.user().services.github.accessToken;
-    var options = {
-      data: {
-        "state": "closed"
-      },
-      params: {
-        "access_token": token
-      }
-    };
-  HTTP.call("PATCH", url, options,
-      function (error, res) {
-        if (error) {
-          console.log(error.message);
-        } else {
-          console.log(res);
-        }
-    });
-}
-
 Template.home.rendered = function(){
 	Template.layout.title = "test";
   Session.setDefault('issue', '');
@@ -101,9 +80,5 @@ Template.home.events({
 
     $('#modal').closeModal();
     return false;
-  },
-  "click .issueState": function(evt) {
-    closeIssue(evt.target.value);
-    evt.target.style.display = 'none';
   }
 });

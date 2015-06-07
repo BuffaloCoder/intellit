@@ -10,6 +10,27 @@ function getIssues (url, options) {
     });
 }
 
+function closeIssue(number) {
+  var url = Session.get('repo_url') + "/issues/" + number;
+  var token = Meteor.user().services.github.accessToken;
+    var options = {
+      data: {
+        "state": "closed"
+      },
+      params: {
+        "access_token": token
+      }
+    };
+  HTTP.call("PATCH", url, options,
+      function (error, res) {
+        if (error) {
+          console.log(error.message);
+        } else {
+          console.log(res);
+        }
+    });
+}
+
 function getRepos() {
   try {
     var token = Meteor.user().services.github.accessToken;
@@ -71,7 +92,6 @@ Template.layout.rendered = function(){
   );
   Session.setDefault('issues', []);
   Session.setDefault('repos', []);
-  title="test"
 };
 
 Template.layout.helpers({
@@ -106,5 +126,9 @@ Template.layout.events({
     };
     getIssues(Session.get("repo_url") + "/issues", options);
     getAssignees();
+  },
+  "click .issueState": function(evt) {
+    closeIssue(evt.target.value);
+    evt.target.style.display = 'none';
   }
 })
