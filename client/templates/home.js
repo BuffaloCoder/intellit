@@ -4,15 +4,17 @@ function getIssues (url, options) {
         if (error) {
           console.log(error.message);
         } else {
-          var issues = res.data;
-          var message = "";
-          for (var i = 0; i < issues.length; i++) {
-            var title = issues[i].title;
-            var issue = issues[i].body;
-            // format message for markdown
-            message += "_::" + title + "::_\n" + issue + "\n\n";
-          };
-          Session.set('issues', message);
+          // var issues = res.data;
+          // console.log(issues);
+          // var message = "";
+          // for (var i = 0; i < issues.length; i++) {
+          //   var title = issues[i].title;
+          //   var issue = issues[i].body;
+          //   // format message for markdown
+          //   message += "_::" + title + "::_\n" + issue + "\n\n";
+          // };
+          // Session.set('issues', message);
+          Session.set('issues', res.data);
         }
     });
 }
@@ -20,6 +22,27 @@ function getIssues (url, options) {
 function createIssue(options) {
   var url = Session.get('repo_url') + "/issues";
   HTTP.post(url, options,
+      function (error, res) {
+        if (error) {
+          console.log(error.message);
+        } else {
+          console.log(res);
+        }
+    });
+}
+
+function closeIssue(number) {
+  var url = Session.get('repo_url') + "/issues/" + number;
+  var token = Meteor.user().services.github.accessToken;
+    var options = {
+      data: {
+        "state": "closed"
+      },
+      params: {
+        "access_token": token
+      }
+    };
+  HTTP.call("PATCH", url, options,
       function (error, res) {
         if (error) {
           console.log(error.message);
@@ -91,7 +114,10 @@ Template.home.rendered = function(){
 };
 
 Template.home.helpers({
-  issues: function () {
+  isOpen: function (state) {
+    return state == 'open';
+  },
+  issue: function () {
     return Session.get('issues');
   },
   repo: function () {
@@ -131,7 +157,6 @@ Template.home.events({
     // clear form
     event.target.title.value = "";
     event.target.body.value = "";
-    // event.target.assignee.value = "";
     event.target.milestone.value = "";
     event.target.labels.value = "";
 
@@ -148,5 +173,9 @@ Template.home.events({
     };
     getIssues(Session.get("repo_url") + "/issues", options);
     getAssignees();
+  },
+  "click .issueState": function(evt) {
+    closeIssue(evt.target.value);
+    evt.target.style.display = 'none';
   }
 });

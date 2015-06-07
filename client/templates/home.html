@@ -21,10 +21,22 @@
     Milestone:<input type="number" name="milestone"><br>
     Labels:<input type="text" name="labels"><br>
 
-    <input type="submit" value="Submit">
+    <input class="btn waves-effect waves-light" type="submit" value="Submit">
   </form>
 
-	<div>
+	<!-- <div>
 		{{#markdown}}{{issues}}{{/markdown}}
-	</div>
+  </div> -->
+  <ul class="collection">
+  {{#each issue}}
+    <li class="collection-item">
+      <i class="mdi-maps-local-offer circle"></i>
+      <span class="title">{{title}}</span>
+      <p>{{body}}</p>
+      {{#if isOpen state}}
+      <button class="issueState waves-effect waves-light btn" value={{number}}>close</button>
+      {{/if}}
+    </li>
+  {{/each}}
+  </ul>
 </template>
