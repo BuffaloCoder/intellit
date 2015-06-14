@@ -13,7 +13,6 @@ function createIssue(options) {
 }
 
 Template.home.rendered = function(){
-	Template.layout.title = "test";
   Session.setDefault('issue', '');
   Session.setDefault('repo', '');
   Session.setDefault('repo_url', '');

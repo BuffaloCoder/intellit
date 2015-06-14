@@ -1,5 +1,4 @@
-"use strict";
-let onResize = function(){
+function onResize(){
   var curPos = $('.mainImage').position();
   if(curPos){
   	var curHeight = $('.mainImage').height();
