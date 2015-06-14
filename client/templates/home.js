@@ -1,6 +1,6 @@
 
 function createIssue(options) {
-  var url = Session.get('repo_url') + "/issues";
+  var url = Session.get('repo_url') + '/issues';
   HTTP.post(url, options,
       function (error, res) {
         if (error) {
@@ -53,24 +53,24 @@ Template.home.events({
     var token = Meteor.user().services.github.accessToken;
     var options = {
       data: {
-        "title": title,
-        "body": body,
-        "assignee": assignee//,
-        // "milestone": milestone,
-        // "labels": labels
+        'title': title,
+        'body': body,
+        'assignee': assignee//,
+        // 'milestone': milestone,
+        // 'labels': labels
       },
       params: {
-        "access_token": token
+        'access_token': token
       }
     };
     var newIssue = createIssue(options);
     console.log(newIssue);
 
     // clear form
-    event.target.title.value = "";
-    event.target.body.value = "";
-    // event.target.milestone.value = "";
-    // event.target.labels.value = "";
+    event.target.title.value = '';
+    event.target.body.value = '';
+    // event.target.milestone.value = '';
+    // event.target.labels.value = '';
 
     // update sidebar
     var issues = Session.get('issues')
